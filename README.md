@@ -39,8 +39,11 @@ zae-docs/
 │   └── long-term-vision.md                 # 5-year roadmap
 ├── glossary/
 │   └── technical-glossary.md               # Unified terminology
-└── research/
-    └── key-references.md                   # Essential papers and sources
+├── research/
+│   └── key-references.md                   # Essential papers and sources
+└── reference/
+    ├── bibliography.md                     # Comprehensive research bibliography
+    └── researchers-directory.md            # Key researchers and institutions
 ```
 
 ## Quick Links
@@ -48,6 +51,29 @@ zae-docs/
 - [Unified Platform Architecture](./architecture/unified-platform-architecture.md)
 - [ARK Space Week Roadmap](./roadmap/ark-space-week.md)
 - [Technical Glossary](./glossary/technical-glossary.md)
+- [Research Bibliography](./reference/bibliography.md) - 100+ researchers, 50+ papers, 35+ books
+- [Researchers Directory](./reference/researchers-directory.md) - 40+ profiles with contact info
+
+## Research Resources
+
+The `/reference/` directory contains comprehensive research materials that establish the intellectual foundations for the Zae Project:
+
+### [Bibliography](./reference/bibliography.md)
+Comprehensive compilation of research across six key domains:
+- **100+ Key Researchers** - Leading scientists in consciousness, BCIs, neuromorphic computing, WBE, neuroscience
+- **50+ Foundational Papers** - Seminal publications with full citations
+- **35+ Essential Books** - Organized by topic with reading recommendations
+- **Research Institutions** - Labs and centers advancing relevant research
+- **Conferences & Journals** - Community engagement opportunities
+
+**Domains Covered**: Consciousness Studies, Brain-Computer Interfaces, Neuromorphic Computing, Whole Brain Emulation, Computational Neuroscience, Satellite Communications, Information Theory
+
+### [Researchers Directory](./reference/researchers-directory.md)
+Detailed profiles and contact information:
+- **40+ Researcher Profiles** - Current affiliations, research focus, Google Scholar links
+- **20+ Major Labs** - Contact information and research specializations
+- **Industry Leaders** - Neuralink, Kernel, Paradromics, Synchron, Blackrock
+- **Collaboration Opportunities** - Potential partnerships and conference targets
 
 ## Core Hypothesis
 
