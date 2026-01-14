@@ -1,0 +1,682 @@
+# Zae Project - Cross-Project API Contracts
+# Version: 1.0.0
+# Last Updated: January 14, 2026
+# Classification: Internal
+
+apiVersion: zae-project.org/v1
+kind: APIContract
+metadata:
+  name: unified-api-contracts
+  description: Machine-readable interface contracts between ArkSpace, MindTransfer, and Consciousness projects
+  version: "1.0.0"
+  classification: Internal
+
+---
+# ARKSPACE ↔ MINDTRANSFER INTERFACE
+---
+
+arkspace_mindtransfer:
+  interface_name: "Neural Data Transmission"
+  version: "1.0.0"
+  status: "Draft"
+  
+  # ===========================================================================
+  # MESSAGE SCHEMAS (Protobuf)
+  # ===========================================================================
+  
+  protobuf_schemas:
+    
+    # UPLINK: Brain → Satellite
+    spike_stream_uplink:
+      message_name: "SpikeStreamUplink"
+      direction: "UPLINK"
+      priority: "REALTIME"
+      
+      fields:
+        - name: "session_id"
+          type: "uint64"
+          required: true
+          description: "Unique session identifier"
+          
+        - name: "timestamp_ns"
+          type: "uint64"
+          required: true
+          description: "GPS-synchronized nanosecond timestamp"
+          
+        - name: "sequence_number"
+          type: "uint32"
+          required: true
+          description: "Packet sequence for ordering and replay detection"
+          
+        - name: "spike_events"
+          type: "repeated SpikeEvent"
+          required: true
+          description: "Array of spike events"
+          
+        - name: "compression"
+          type: "CompressionType enum"
+          required: false
+          default: "LZ4"
+          
+        - name: "checksum"
+          type: "uint32"
+          required: true
+          description: "CRC32 for integrity verification"
+      
+      nested_types:
+        spike_event:
+          fields:
+            - name: "neuron_id"
+              type: "uint32"
+              description: "Global neuron identifier (0 to 4.3B)"
+              
+            - name: "timestamp_offset_us"
+              type: "uint32"
+              description: "Microsecond offset from message timestamp"
+              
+            - name: "amplitude"
+              type: "float32"
+              required: false
+              description: "Optional spike amplitude"
+        
+        compression_type:
+          enum_values: ["NONE", "LZ4", "ZSTD"]
+      
+      performance_requirements:
+        max_latency_ms: 17
+        bandwidth_mbps: [100, 1000]
+        packet_rate_per_second: [10000, 100000]
+        typical_packet_size_kb: [1, 10]
+    
+    # DOWNLINK: Satellite → Brain
+    stimulation_command_downlink:
+      message_name: "StimulationCommandDownlink"
+      direction: "DOWNLINK"
+      priority: "REALTIME"
+      
+      fields:
+        - name: "session_id"
+          type: "uint64"
+          required: true
+          
+        - name: "timestamp_ns"
+          type: "uint64"
+          required: true
+          
+        - name: "sequence_number"
+          type: "uint32"
+          required: true
+          
+        - name: "stim_events"
+          type: "repeated StimulationEvent"
+          required: true
+          
+        - name: "safety_signature"
+          type: "SafetyChecksum"
+          required: true
+          description: "Cryptographic signature from Neural Firewall"
+          
+        - name: "checksum"
+          type: "uint32"
+          required: true
+      
+      nested_types:
+        stimulation_event:
+          fields:
+            - name: "electrode_id"
+              type: "uint32"
+              
+            - name: "amplitude_uA"
+              type: "int16"
+              description: "Current amplitude in microamps"
+              constraints:
+                min: -100
+                max: 100
+              
+            - name: "duration_us"
+              type: "uint16"
+              description: "Pulse duration in microseconds"
+              
+            - name: "waveform"
+              type: "WaveformType enum"
+              
+            - name: "timestamp_offset_us"
+              type: "uint32"
+        
+        waveform_type:
+          enum_values: ["MONOPHASIC", "BIPHASIC", "CHARGE_BALANCED"]
+        
+        safety_checksum:
+          fields:
+            - name: "signature"
+              type: "bytes"
+              description: "HMAC-SHA256 from firewall"
+              
+            - name: "firewall_timestamp"
+              type: "uint64"
+      
+      safety_limits:
+        max_amplitude_uA: 100
+        max_frequency_hz: 200
+        max_charge_per_phase_nC: 50
+        max_duty_cycle_percent: 50
+      
+      performance_requirements:
+        max_latency_ms: 23
+        bandwidth_mbps: [100, 1000]
+  
+  # ===========================================================================
+  # REST API CONTRACTS
+  # ===========================================================================
+  
+  rest_api:
+    base_url: "https://edge.arkspace.me/api/v1"
+    authentication: "Bearer token (OAuth 2.0)"
+    
+    endpoints:
+      
+      create_session:
+        path: "/sessions"
+        method: "POST"
+        description: "Create new neural streaming session"
+        
+        request_body:
+          content_type: "application/json"
+          schema:
+            type: "object"
+            required: ["user_id", "interface_id"]
+            properties:
+              user_id:
+                type: "string"
+                format: "uuid"
+              interface_id:
+                type: "string"
+                description: "MindTransfer device ID"
+              target_satellite:
+                type: "string"
+                required: false
+              encryption_key_id:
+                type: "string"
+        
+        response:
+          status_code: 201
+          schema:
+            type: "object"
+            properties:
+              session_id:
+                type: "string"
+                format: "uuid"
+              encryption_key:
+                type: "string"
+                format: "base64"
+              satellite_endpoint:
+                type: "string"
+                format: "uri"
+              edge_node_endpoint:
+                type: "string"
+                format: "uri"
+              qos_tier:
+                type: "string"
+                enum: ["REALTIME", "BULK", "BEST_EFFORT"]
+              max_latency_ms:
+                type: "integer"
+              expires_at:
+                type: "string"
+                format: "date-time"
+      
+      get_session_status:
+        path: "/sessions/{session_id}"
+        method: "GET"
+        
+        parameters:
+          - name: "session_id"
+            in: "path"
+            type: "string"
+            format: "uuid"
+        
+        response:
+          status_code: 200
+          schema:
+            type: "object"
+            properties:
+              session_id: {type: "string"}
+              status: {type: "string", enum: ["ACTIVE", "PAUSED", "DISCONNECTED"]}
+              satellite_connection: {type: "boolean"}
+              uplink_latency_ms: {type: "number"}
+              downlink_latency_ms: {type: "number"}
+              rtt_ms: {type: "number"}
+              packet_loss_uplink_percent: {type: "number"}
+              packet_loss_downlink_percent: {type: "number"}
+              bandwidth_uplink_mbps: {type: "number"}
+              bandwidth_downlink_mbps: {type: "number"}
+      
+      emergency_stop:
+        path: "/sessions/{session_id}/emergency-stop"
+        method: "POST"
+        description: "Emergency halt of all stimulation"
+        
+        response_time_requirement_ms: 100
+        
+        response:
+          status_code: 200
+          schema:
+            type: "object"
+            properties:
+              session_id: {type: "string"}
+              status: {type: "string", enum: ["EMERGENCY_STOPPED"]}
+              stopped_at: {type: "string", format: "date-time"}
+              actions_taken: {type: "array", items: {type: "string"}}
+  
+  # ===========================================================================
+  # WEBSOCKET API
+  # ===========================================================================
+  
+  websocket_api:
+    endpoint: "wss://edge.arkspace.me/stream/{session_id}"
+    protocol: "Binary (Protobuf) + JSON control messages"
+    
+    client_to_server:
+      - message_type: "spike_stream"
+        format: "binary"
+        schema: "SpikeStreamUplink protobuf"
+        
+      - message_type: "control"
+        format: "json"
+        schema:
+          type: "object"
+          properties:
+            type: {type: "string", const: "CONTROL"}
+            command: {type: "string", enum: ["PAUSE", "RESUME", "SET_PARAMETERS"]}
+            parameters: {type: "object"}
+      
+      - message_type: "heartbeat"
+        format: "json"
+        frequency_seconds: 1
+        schema:
+          type: "object"
+          properties:
+            type: {type: "string", const: "HEARTBEAT"}
+            timestamp: {type: "string", format: "date-time"}
+            device_status: {type: "string", enum: ["OK", "WARNING", "ERROR"]}
+    
+    server_to_client:
+      - message_type: "stim_command"
+        format: "binary"
+        schema: "StimulationCommandDownlink protobuf"
+        
+      - message_type: "status"
+        format: "json"
+        frequency_seconds: 5
+        
+      - message_type: "alert"
+        format: "json"
+        schema:
+          type: "object"
+          properties:
+            type: {type: "string", const: "ALERT"}
+            severity: {type: "string", enum: ["INFO", "WARNING", "CRITICAL"]}
+            message: {type: "string"}
+            timestamp: {type: "string", format: "date-time"}
+
+---
+# ARKSPACE ↔ CONSCIOUSNESS INTERFACE
+---
+
+arkspace_consciousness:
+  interface_name: "SNN Deployment & State Management"
+  version: "1.0.0"
+  status: "Draft"
+  
+  # ===========================================================================
+  # SNN STATE TRANSFER SCHEMA
+  # ===========================================================================
+  
+  protobuf_schemas:
+    
+    snn_state:
+      message_name: "SNNState"
+      description: "Complete SNN state for migration between satellites"
+      
+      fields:
+        - name: "header"
+          type: "StateHeader"
+          required: true
+          
+        - name: "neurons"
+          type: "repeated NeuronState"
+          required: true
+          
+        - name: "synapses"
+          type: "repeated SynapseState"
+          required: true
+          
+        - name: "compression"
+          type: "CompressionMetadata"
+          required: true
+      
+      nested_types:
+        state_header:
+          fields:
+            - {name: "source_node_id", type: "string"}
+            - {name: "destination_node_id", type: "string"}
+            - {name: "timestamp_ns", type: "uint64"}
+            - {name: "state_version", type: "uint32"}
+            - {name: "neuron_count", type: "uint64"}
+            - {name: "synapse_count", type: "uint64"}
+            - {name: "checksum_sha256", type: "bytes"}
+        
+        neuron_state:
+          fields:
+            - {name: "neuron_id", type: "uint32"}
+            - {name: "membrane_potential_mV", type: "float32"}
+            - {name: "refractory_remaining_us", type: "uint16"}
+            - {name: "last_spike_time_ns", type: "uint64"}
+            - {name: "adaptation_current", type: "float32"}
+        
+        synapse_state:
+          fields:
+            - {name: "synapse_id", type: "uint64"}
+            - {name: "pre_neuron_id", type: "uint32"}
+            - {name: "post_neuron_id", type: "uint32"}
+            - {name: "weight", type: "float32"}
+            - {name: "eligibility_trace", type: "float32"}
+        
+        compression_metadata:
+          fields:
+            - {name: "type", type: "CompressionType enum"}
+            - {name: "original_size_bytes", type: "uint32"}
+            - {name: "compressed_size_bytes", type: "uint32"}
+            - {name: "compression_ratio", type: "float32"}
+      
+      performance_requirements:
+        transfer_bandwidth_gbps: [10, 60]
+        max_transfer_latency_ms: 50
+        max_migration_duration_ms: 200
+    
+    spike_stream_inter_satellite:
+      message_name: "SpikeStreamInterSatellite"
+      description: "Real-time spike routing between satellites"
+      
+      fields:
+        - {name: "session_id", type: "uint64"}
+        - {name: "source_node_id", type: "uint8"}
+        - {name: "destination_node_id", type: "uint8"}
+        - {name: "timestamp_ns", type: "uint64"}
+        - {name: "sequence_number", type: "uint32"}
+        - {name: "spike_events", type: "repeated SpikeEvent"}
+        - {name: "priority", type: "PriorityLevel enum"}
+        - {name: "checksum", type: "uint32"}
+      
+      nested_types:
+        priority_level:
+          enum_values: ["CRITICAL", "HIGH", "NORMAL"]
+          latency_targets_ms: [5, 10, 20]
+  
+  # ===========================================================================
+  # SNN DEPLOYMENT API
+  # ===========================================================================
+  
+  rest_api:
+    base_url: "https://ground.arkspace.me/api/v1"
+    authentication: "Bearer token + X.509 client certificate"
+    
+    endpoints:
+      
+      deploy_snn_model:
+        path: "/nodes/{node_id}/snn"
+        method: "POST"
+        description: "Deploy compiled SNN model to satellite"
+        
+        request:
+          content_type: "application/octet-stream"
+          body: "Binary SNN model package (Nengo-compiled)"
+          
+          query_parameters:
+            - {name: "model_version", type: "string", required: true}
+            - {name: "checksum", type: "string", format: "sha256", required: true}
+            - {name: "replace_existing", type: "boolean", default: true}
+        
+        response:
+          status_code: 202
+          schema:
+            type: "object"
+            properties:
+              deployment_id: {type: "string", format: "uuid"}
+              node_id: {type: "string"}
+              status: {type: "string", enum: ["UPLOADING", "VERIFYING", "ACTIVATING"]}
+              estimated_completion_seconds: {type: "integer"}
+      
+      get_snn_status:
+        path: "/nodes/{node_id}/snn"
+        method: "GET"
+        
+        response:
+          status_code: 200
+          schema:
+            type: "object"
+            properties:
+              node_id: {type: "string"}
+              model_version: {type: "string"}
+              deployed_at: {type: "string", format: "date-time"}
+              status: {type: "string", enum: ["RUNNING", "PAUSED", "UPDATING", "ERROR"]}
+              neuron_count: {type: "integer"}
+              synapse_count: {type: "integer"}
+              utilization_percent: {type: "number"}
+              power_consumption_watts: {type: "number"}
+              temperature_celsius: {type: "number"}
+      
+      get_snn_state_snapshot:
+        path: "/nodes/{node_id}/snn/state"
+        method: "GET"
+        
+        query_parameters:
+          - {name: "format", type: "string", enum: ["summary", "full", "sparse"]}
+        
+        response:
+          content_type: "application/octet-stream"
+          headers:
+            - {name: "X-State-Version", type: "string"}
+            - {name: "X-Neuron-Count", type: "integer"}
+            - {name: "X-Checksum", type: "string", format: "sha256"}
+          body: "SNNState protobuf"
+      
+      load_snn_state:
+        path: "/nodes/{node_id}/snn/state"
+        method: "PUT"
+        description: "Load SNN state for migration or restore"
+        
+        request:
+          content_type: "application/octet-stream"
+          headers:
+            - {name: "X-Source-Node", type: "string"}
+            - {name: "X-State-Version", type: "string"}
+          body: "SNNState protobuf"
+        
+        response:
+          status_code: 200
+          schema:
+            type: "object"
+            properties:
+              node_id: {type: "string"}
+              state_loaded: {type: "boolean"}
+              state_version: {type: "string"}
+              load_duration_ms: {type: "integer"}
+              verification: {type: "string", enum: ["PASSED", "FAILED"]}
+  
+  # ===========================================================================
+  # NEURAL FIREWALL API
+  # ===========================================================================
+  
+  firewall_api:
+    base_url: "https://ground.arkspace.me/api/v1/firewall"
+    
+    endpoints:
+      
+      get_security_events:
+        path: "/events"
+        method: "GET"
+        
+        query_parameters:
+          - {name: "since", type: "string", format: "date-time"}
+          - {name: "severity", type: "string", enum: ["INFO", "WARNING", "CRITICAL", "EMERGENCY"]}
+          - {name: "limit", type: "integer", default: 100}
+        
+        response:
+          schema:
+            type: "object"
+            properties:
+              events:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    event_id: {type: "string", format: "uuid"}
+                    timestamp: {type: "string", format: "date-time"}
+                    severity: {type: "string"}
+                    source: {type: "string", enum: ["EDGE_NODE", "SATELLITE", "GROUND_STATION"]}
+                    event_type: {type: "string"}
+                    description: {type: "string"}
+                    affected_session_id: {type: "string"}
+                    action_taken: {type: "string"}
+      
+      activate_kill_switch:
+        path: "/kill-switch"
+        method: "POST"
+        description: "Emergency shutdown of neural stimulation"
+        
+        request_body:
+          schema:
+            type: "object"
+            required: ["session_id", "reason"]
+            properties:
+              session_id: {type: "string"}
+              reason: {type: "string"}
+              scope: {type: "string", enum: ["SESSION", "NODE", "CONSTELLATION"]}
+        
+        response:
+          status_code: 200
+          response_time_requirement_ms: 100
+          schema:
+            type: "object"
+            properties:
+              kill_switch_activated: {type: "boolean"}
+              scope: {type: "string"}
+              affected_sessions: {type: "array", items: {type: "string"}}
+              timestamp: {type: "string", format: "date-time"}
+              actions_taken: {type: "array", items: {type: "string"}}
+
+---
+# SECURITY CONTRACTS (ALL INTERFACES)
+---
+
+security:
+  
+  authentication:
+    user_level:
+      method: "OAuth 2.0"
+      mfa_required: true
+      providers: ["Google", "Microsoft", "Custom IdP"]
+      session_duration_hours: 8
+      
+    device_level:
+      method: "X.509 client certificates"
+      ca: "ArkSpace Internal CA"
+      certificate_validity_days: 365
+      storage: "TPM/HSM"
+      
+    session_level:
+      method: "ECDH key exchange (Curve25519)"
+      key_rotation_hours: 1
+      perfect_forward_secrecy: true
+  
+  encryption:
+    real_time_streams:
+      algorithm: "AES-256-GCM"
+      key_derivation: "HKDF from ECDH shared secret"
+      iv_generation: "Timestamp-based (never reused)"
+      latency_overhead_ms: 1
+      
+    control_plane:
+      algorithm: "TLS 1.3"
+      cipher_suite: "TLS_AES_256_GCM_SHA384"
+      
+    data_at_rest:
+      algorithm: "AES-256-GCM"
+      key_management: "AWS KMS / HashiCorp Vault"
+  
+  authorization:
+    model: "RBAC (Role-Based Access Control)"
+    
+    roles:
+      - {name: "USER", permissions: ["read_own_sessions", "create_session", "emergency_stop_own"]}
+      - {name: "OPERATOR", permissions: ["read_all_sessions", "view_telemetry", "view_security_events"]}
+      - {name: "ENGINEER", permissions: ["deploy_snn", "update_firewall", "read_all"]}
+      - {name: "ADMIN", permissions: ["all"]}
+
+---
+# PERFORMANCE CONTRACTS
+---
+
+performance_sla:
+  
+  latency:
+    ground_to_satellite_ms: {target: 10, maximum: 15}
+    inter_satellite_hop_ms: {target: 10, maximum: 20}
+    total_rtt_ms: {target: 40, maximum: 70}
+    
+  bandwidth:
+    oisl_inter_satellite_gbps: {minimum: 60, typical: 100, maximum: 200}
+    ground_uplink_mbps: {minimum: 500, typical: 1000}
+    ground_downlink_mbps: {minimum: 1000, typical: 2000}
+    
+  reliability:
+    packet_loss_percent: {target: 0.001, maximum: 0.01}
+    availability_percent: {target: 99.99}
+    failover_time_seconds: {maximum: 1}
+    
+  state_transfer:
+    migration_duration_ms: {target: 100, maximum: 200}
+    checkpoint_frequency_seconds: 1
+    recovery_time_objective_seconds: 5
+
+---
+# DATA FORMATS
+---
+
+data_formats:
+  
+  serialization:
+    protocol_buffers:
+      version: "proto3"
+      language_bindings: ["Python", "C++", "Rust"]
+      
+  compression:
+    algorithms:
+      - {name: "LZ4", use_case: "Real-time streams", ratio: "2:1 to 5:1", latency_ms: 1}
+      - {name: "ZSTD", use_case: "Bulk transfers", ratio: "5:1 to 10:1", latency_ms: 10}
+      
+  encoding:
+    timestamps: "Nanoseconds since GPS epoch (uint64)"
+    identifiers: "UUID v4"
+    checksums: "CRC32 or SHA256"
+
+---
+# VERSIONING & COMPATIBILITY
+---
+
+versioning:
+  api_version: "v1"
+  protocol_version: "OISL-Neural-v1"
+  
+  backward_compatibility:
+    breaking_changes_policy: "Major version bump (v1 → v2)"
+    deprecation_notice_months: 6
+    support_duration_years: 2
+    
+  protobuf_evolution:
+    field_addition: "Allowed (backward compatible)"
+    field_removal: "Requires deprecation period"
+    field_renumbering: "Prohibited"
+
+---
+# End of API Contracts
