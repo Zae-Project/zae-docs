@@ -1,46 +1,39 @@
 # Zae Organization - Unified Documentation
 
-**Private Repository** | Consciousness Substrate Platform
+**Public Repository** | Consciousness Substrate Platform
 
 ---
 
 ## Overview
 
-This repository contains the unified architecture documentation for the **Zae** organization - a private GitHub organization that coordinates three interconnected projects forming a complete system for seamless biological-to-synthetic consciousness substrate transfer.
+This repository contains the unified architecture documentation for the **Zae** organization a GitHub organization that coordinates three interconnected projects forming a complete system for seamless biological-to-synthetic consciousness substrate transfer.
 
 ## The Three Pillars
 
-| Project | Layer | Domain | Public Repo | Website |
-|---------|-------|--------|-------------|---------|
-| **ArkSpace.me** | Infrastructure | Satellite Compute Clusters | [arkspace-me](https://github.com/arkspace-me) | [arkspace.me](https://arkspace.me) |
-| **MindTransfer.me** | Interface | Corpus Callosum BCI | [brain_emulation](https://github.com/venturaEffect/brain_emulation) | [mindtransfer.me](https://mindtransfer.me) |
-| **TheConsciousness.ai/core** | Software | SNN & Neural Firewall | [neutral-consciousness-engine](https://github.com/venturaEffect/neutral-consciousness-engine) | [theconsiousness.ai/core](https://theconsiousness.ai/core) |
+| Project | Layer | Domain | Repository | Website |
+|---------|-------|--------|------------|---------|
+| **ArkSpace.me** | Infrastructure | Satellite Compute Clusters | [arkspace-core](https://github.com/Zae-Project/arkspace-core) | [arkspace.me](https://arkspace.me) |
+| **MindTransfer.me** | Interface | Corpus Callosum BCI | [brain-emulation](https://github.com/Zae-Project/brain-emulation) | [mindtransfer.me](https://mindtransfer.me) |
+| **TheConsciousness.ai/core** | Software | SNN & Neural Firewall | [neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) | [theconsciousness.ai/core](https://theconsciousness.ai/core) |
 
-> **Note**: The main [theconsiousness.ai](https://theconsiousness.ai) site covers generic Artificial Consciousness research. The **/core** subsite specifically covers the Consciousness Substrate Transfer project (Neutral Consciousness Engine).
+> **Note**: The main [theconsciousness.ai](https://theconsciousness.ai) site covers generic Artificial Consciousness research. The **/core** subsite specifically covers the Consciousness Substrate Transfer project (Neutral Consciousness Engine).
 
 ## Repository Structure
 
 ```
 zae-docs/
-├── README.md                           # This file
+├── README.md                               # This file
 ├── architecture/
-│   ├── unified-platform-architecture.md    # Master architecture document
-│   ├── data-flow-architecture.md           # Signal path from brain to satellite
-│   ├── latency-budget-analysis.md          # Timing analysis (Libet buffer)
-│   └── security-architecture.md            # Zero-trust neural security
+│   └── unified-platform-architecture.md    # Master architecture document
 ├── integration/
 │   ├── arkspace-mindtransfer-interface.md  # ArkSpace ↔ MindTransfer contracts
 │   ├── arkspace-consciousness-interface.md # ArkSpace ↔ Consciousness contracts
 │   ├── mindtransfer-consciousness-interface.md # MindTransfer ↔ Consciousness
 │   └── api-contracts.yaml                  # Formal API specifications
 ├── roadmap/
-│   ├── ark-space-week.md                   # Immediate sprint tasks
-│   ├── phase-1-foundation.md               # Q1 objectives
-│   └── long-term-vision.md                 # 5-year roadmap
+│   └── ark-space-week.md                   # Immediate sprint tasks
 ├── glossary/
 │   └── technical-glossary.md               # Unified terminology
-├── research/
-│   └── key-references.md                   # Essential papers and sources
 └── reference/
     ├── bibliography.md                     # Comprehensive research bibliography
     └── researchers-directory.md            # Key researchers and institutions
@@ -86,8 +79,8 @@ This is based on:
 
 ## Contributing
 
-All documentation changes must be reviewed before merging. This repository is private and access is restricted to core team members.
+All documentation changes must be reviewed before merging. See individual project repositories under the [Zae-Project](https://github.com/Zae-Project) organization for contribution guidelines.
 
 ## License
 
-Proprietary - All Rights Reserved
+All Rights Reserved

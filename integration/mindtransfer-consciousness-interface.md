@@ -10,8 +10,8 @@
 
 This document defines the interface between **MindTransfer.me** (Interface Layer) and **TheConsciousness.ai/core** (Software Layer). This interface handles the translation between biological neural signals and the SNN computational substrate, including encryption, encoding, and safety mechanisms.
 
-> **Note**: [theconsiousness.ai](https://theconsiousness.ai) (main) covers generic Artificial Consciousness research.  
-> **[theconsiousness.ai/core](https://theconsiousness.ai/core)** is the specific Consciousness Substrate Transfer project integrated with ArkSpace and MindTransfer.
+> **Note**: [theconsciousness.ai](https://theconsciousness.ai) (main) covers generic Artificial Consciousness research.  
+> **[theconsciousness.ai/core](https://theconsciousness.ai/core)** is the specific Consciousness Substrate Transfer project integrated with ArkSpace and MindTransfer.
 
 ---
 
