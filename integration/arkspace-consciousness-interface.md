@@ -10,8 +10,8 @@
 
 This document defines the interface between **ArkSpace.me** (Infrastructure Layer) and **TheConsciousness.ai/core** (Software Layer). This interface governs how the SNN Engine and Neural Firewall software runs on the satellite neuromorphic hardware.
 
-> **Note**: [theconsiousness.ai](https://theconsiousness.ai) (main) covers generic Artificial Consciousness research.  
-> **[theconsiousness.ai/core](https://theconsiousness.ai/core)** is the specific Consciousness Substrate Transfer project integrated with ArkSpace and MindTransfer.
+> **Note**: [theconsciousness.ai](https://theconsciousness.ai) (main) covers generic Artificial Consciousness research.  
+> **[theconsciousness.ai/core](https://theconsciousness.ai/core)** is the specific Consciousness Substrate Transfer project integrated with ArkSpace and MindTransfer.
 
 ---
 

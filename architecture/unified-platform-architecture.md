@@ -119,7 +119,7 @@ This document serves as the single source of truth for understanding how these p
 - Satellite node hardware requirements
 - Ground station interface specifications
 
-**Repository**: [github.com/arkspace-me](https://github.com/arkspace-me)  
+**Repository**: [Zae-Project/arkspace-core](https://github.com/Zae-Project/arkspace-core)
 **Website**: [arkspace.me](https://arkspace.me)
 
 ---
@@ -143,7 +143,7 @@ This document serves as the single source of truth for understanding how these p
 - Uni-hemispheric Subjective Test protocol
 - Axonal regeneration requirements
 
-**Repository**: [github.com/venturaEffect/brain_emulation](https://github.com/venturaEffect/brain_emulation)  
+**Repository**: [Zae-Project/brain-emulation](https://github.com/Zae-Project/brain-emulation)
 **Website**: [mindtransfer.me](https://mindtransfer.me)
 
 **Current Capabilities** (from brain_emulation repo):
@@ -173,13 +173,11 @@ This document serves as the single source of truth for understanding how these p
 - Generative Model for bandwidth optimization
 - Brainjacking detection and prevention
 
-**Repositories**:
-- Public (Generic ACM): [github.com/venturaEffect/the_consciousness_ai](https://github.com/venturaEffect/the_consciousness_ai) - Artificial Consciousness research
-- Core (Substrate Transfer): [github.com/venturaEffect/neutral-consciousness-engine](https://github.com/venturaEffect/neutral-consciousness-engine) - Neutral Consciousness Engine
+**Repository**: [Zae-Project/neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) - Neutral Consciousness Engine
 
 **Websites**:
-- Main: [theconsiousness.ai](https://theconsiousness.ai) - Generic Artificial Consciousness approach
-- **Core**: [theconsiousness.ai/core](https://theconsiousness.ai/core) - Consciousness Substrate Transfer project (this integration)
+- Main: [theconsciousness.ai](https://theconsciousness.ai) - Generic Artificial Consciousness approach
+- **Core**: [theconsciousness.ai/core](https://theconsciousness.ai/core) - Consciousness Substrate Transfer project (this integration)
 
 **Architecture Layers** (from neutral-consciousness-engine):
 1. **The Connectome** - SNN with Leaky Integrate-and-Fire neurons
