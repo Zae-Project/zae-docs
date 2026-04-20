@@ -97,7 +97,7 @@ This document serves as the single source of truth for understanding how these p
 
 ---
 
-## The Three Pillars
+## The Four Pillars
 
 ### 1. ArkSpace.me - The Infrastructure Layer
 
@@ -183,6 +183,33 @@ This document serves as the single source of truth for understanding how these p
 1. **The Connectome** - SNN with Leaky Integrate-and-Fire neurons
 2. **The Dream Engine** - Generative Model for predictive coding
 3. **The Guardian** - Neural Firewall with brainjacking defenses
+
+---
+
+### 4. The Substrate - Thermodynamic Computing Layer
+
+**Mission**: Define the physical computing paradigm that makes brain-scale emulation energetically viable — computation by thermal relaxation rather than deterministic switching.
+
+**Core Concept**: Current digital CMOS dissipates energy $10^6$–$10^9\times$ above the thermodynamic lower bound ($k_B T \ln 2 \approx 2.8 \times 10^{-21}$ J). A 100M-neuron satellite payload at 50–200W is not achievable with von Neumann architectures. Thermodynamic computing — where physical systems relax toward equilibrium to perform inference — targets operation near this bound.
+
+**Core Components**:
+
+| Component | Specification | Purpose |
+|-----------|---------------|---------|
+| **p-bits (probabilistic bits)** | Subthreshold CMOS or MTJ-based | Stochastic hardware neurons fluctuating between 0/1 |
+| **Langevin Substrate** | Physical degrees of freedom governed by $\dot{x} = -\mu\nabla V_\theta + \text{noise}$ | Computes by physical relaxation toward energy minimum |
+| **HBSC Skip Couplings** | Rank-$k$ SVD bilinear couplings | Non-local connectivity without $O(D^2)$ wiring |
+| **Hybrid Digital Interface** | <0.1% of model parameters | Overcomes eigenvalue concentration; anchors substrate to input |
+| **THRML Compiler** | JAX-based probabilistic model library | Maps ML graphs to TC hardware instructions |
+
+**Key Deliverables**:
+- Architecture specifications for TC hardware primitives (p-bits, neuristors)
+- Scaling solutions (HBSC, hybrid digital conditioning)
+- Algorithm documentation (DTM, Langevin training, K-FAC)
+- Integration contracts with Engine and Infrastructure pillars
+- Technology Readiness assessment for orbital deployment
+
+**Repository**: [Zae-Project/thermodynamic-core](https://github.com/Zae-Project/thermodynamic-core)
 
 ---
 

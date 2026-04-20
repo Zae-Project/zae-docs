@@ -8,13 +8,14 @@
 
 This repository contains the unified architecture documentation for the **Zae** organization a GitHub organization that coordinates three interconnected projects forming a complete system for seamless biological-to-synthetic consciousness substrate transfer.
 
-## The Three Pillars
+## The Four Pillars
 
 | Project | Layer | Domain | Repository | Website |
 |---------|-------|--------|------------|---------|
-| **ArkSpace.me** | Infrastructure | Satellite Compute Clusters | [arkspace-core](https://github.com/Zae-Project/arkspace-core) | [arkspace.me](https://arkspace.me) |
-| **MindTransfer.me** | Interface | Corpus Callosum BCI | [brain-emulation](https://github.com/Zae-Project/brain-emulation) | [mindtransfer.me](https://mindtransfer.me) |
-| **TheConsciousness.ai/core** | Software | SNN & Neural Firewall | [neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) | [theconsciousness.ai/core](https://theconsciousness.ai/core) |
+| **ArkSpace.me** | 🛰️ Infrastructure | Satellite Compute Clusters | [arkspace-core](https://github.com/Zae-Project/arkspace-core) | [arkspace.me](https://arkspace.me) |
+| **MindTransfer.me** | 🧠 Interface | Corpus Callosum BCI | [brain-emulation](https://github.com/Zae-Project/brain-emulation) | [mindtransfer.me](https://mindtransfer.me) |
+| **TheConsciousness.ai/core** | ⚡ Engine | SNN & Neural Firewall | [neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) | [theconsciousness.ai/core](https://theconsciousness.ai/core) |
+| **The Substrate** | 🌡️ Substrate | Thermodynamic Computing | [thermodynamic-core](https://github.com/Zae-Project/thermodynamic-core) | — |
 
 > **Note**: The main [theconsciousness.ai](https://theconsciousness.ai) site covers generic Artificial Consciousness research. The **/core** subsite specifically covers the Consciousness Substrate Transfer project (Neutral Consciousness Engine).
 
@@ -22,21 +23,23 @@ This repository contains the unified architecture documentation for the **Zae** 
 
 ```
 zae-docs/
-├── README.md                               # This file
+├── README.md                                      # This file
 ├── architecture/
-│   └── unified-platform-architecture.md    # Master architecture document
+│   └── unified-platform-architecture.md           # Master architecture document
 ├── integration/
-│   ├── arkspace-mindtransfer-interface.md  # ArkSpace ↔ MindTransfer contracts
-│   ├── arkspace-consciousness-interface.md # ArkSpace ↔ Consciousness contracts
-│   ├── mindtransfer-consciousness-interface.md # MindTransfer ↔ Consciousness
-│   └── api-contracts.yaml                  # Formal API specifications
+│   ├── arkspace-mindtransfer-interface.md         # ArkSpace ↔ MindTransfer contracts
+│   ├── arkspace-consciousness-interface.md        # ArkSpace ↔ Consciousness contracts
+│   ├── mindtransfer-consciousness-interface.md    # MindTransfer ↔ Consciousness
+│   ├── thermodynamic-consciousness-interface.md   # Substrate ↔ Engine contracts
+│   ├── thermodynamic-arkspace-interface.md        # Substrate ↔ Infrastructure contracts
+│   └── api-contracts.yaml                         # Formal API specifications
 ├── roadmap/
-│   └── ark-space-week.md                   # Immediate sprint tasks
+│   └── ark-space-week.md                          # Immediate sprint tasks
 ├── glossary/
-│   └── technical-glossary.md               # Unified terminology
+│   └── technical-glossary.md                      # Unified terminology
 └── reference/
-    ├── bibliography.md                     # Comprehensive research bibliography
-    └── researchers-directory.md            # Key researchers and institutions
+    ├── bibliography.md                            # Comprehensive research bibliography
+    └── researchers-directory.md                  # Key researchers and institutions
 ```
 
 ## Quick Links
@@ -59,7 +62,7 @@ Comprehensive compilation of research across six key domains:
 - **Research Institutions** - Labs and centers advancing relevant research
 - **Conferences & Journals** - Community engagement opportunities
 
-**Domains Covered**: Consciousness Studies, Brain-Computer Interfaces, Neuromorphic Computing, Whole Brain Emulation, Computational Neuroscience, Satellite Communications, Information Theory
+**Domains Covered**: Consciousness Studies, Brain-Computer Interfaces, Neuromorphic Computing, Thermodynamic Computing, Whole Brain Emulation, Computational Neuroscience, Satellite Communications, Information Theory
 
 ### [Researchers Directory](./reference/researchers-directory.md)
 Detailed profiles and contact information:

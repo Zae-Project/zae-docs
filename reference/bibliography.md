@@ -12,12 +12,13 @@
 2. [Consciousness Studies](#consciousness-studies)
 3. [Brain-Computer Interfaces](#brain-computer-interfaces)
 4. [Neuromorphic Computing & Spiking Neural Networks](#neuromorphic-computing--spiking-neural-networks)
-5. [Whole Brain Emulation & Mind Uploading](#whole-brain-emulation--mind-uploading)
-6. [Computational Neuroscience](#computational-neuroscience)
-7. [Satellite Communications & Space Systems](#satellite-communications--space-systems)
-8. [Information Theory & Substrate-Independent Minds](#information-theory--substrate-independent-minds)
-9. [Research Institutions](#research-institutions)
-10. [Conferences & Journals](#conferences--journals)
+5. [Thermodynamic Computing & Stochastic Substrates](#thermodynamic-computing--stochastic-substrates) *(new)*
+6. [Whole Brain Emulation & Mind Uploading](#whole-brain-emulation--mind-uploading)
+7. [Computational Neuroscience](#computational-neuroscience)
+8. [Satellite Communications & Space Systems](#satellite-communications--space-systems)
+9. [Information Theory & Substrate-Independent Minds](#information-theory--substrate-independent-minds)
+10. [Research Institutions](#research-institutions)
+11. [Conferences & Journals](#conferences--journals)
 
 ---
 
@@ -28,7 +29,7 @@ The Zae Project is an ambitious research initiative exploring consciousness subs
 - **Brain-emulation**: Corpus callosum brain-computer interface  
 - **Neutral-consciousness-engine**: Spiking neural network software platform
 
-This bibliography represents the intellectual foundations from which the Zae Project draws inspiration, technical approaches, and theoretical frameworks.
+This bibliography represents the intellectual foundations from which the Zae Project draws inspiration, technical approaches, and theoretical frameworks. **Updated April 2026** to include the Thermodynamic Computing & Stochastic Substrates domain, reflecting the addition of thermodynamic-core as the 4th Zae Project pillar.
 
 ---
 
@@ -226,6 +227,84 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 2. **Maass, W.** (1997). "Networks of spiking neurons: the third generation of neural network models." *Neural Networks*, 10(9), 1659-1671.
 3. **Eliasmith, C., et al.** (2012). "A large-scale model of the functioning brain." *Science*, 338(6111), 1202-1205.
 4. **Davies, M., et al.** (2018). "Loihi: A neuromorphic manycore processor with on-chip learning." *IEEE Micro*, 38(1), 82-99.
+
+---
+
+## Thermodynamic Computing & Stochastic Substrates
+
+### Foundational Theory & Manifesto
+
+#### Tom Conte, Todd Hylton et al.
+- **Institution**: Georgia Tech (Conte); Retired DARPA (Hylton); multiple institutions (CCC Workshop)
+- **Key Contributions**: Defined thermodynamic computing as a formal discipline; established the $k_B T$ lower-bound argument; roadmap for treating thermal noise as a computational resource
+- **Major Works**:
+  - "Thermodynamic Computing" — CCC Workshop Report (2019) — [arXiv:1911.01968](https://arxiv.org/abs/1911.01968)
+- **Relevance to Zae**: Foundational framework for the Substrate pillar; establishes the 9-order-of-magnitude energy gap that motivates TC for brain-scale emulation
+
+#### Todd Hylton
+- **Institution**: Ex-DARPA program manager
+- **Key Contributions**: Comprehensive architecture guide for thermodynamic computing; evolvable core paradigm
+- **Major Works**:
+  - *Thermodynamic Computing* (Book, River Publishers, 2020)
+- **Relevance to Zae**: Architecture patterns for building TC systems at scale
+
+### Extropic AI: TSU / DTM / THRML
+
+#### Guillaume Verdon
+- **Institution**: Extropic AI (founder/CEO)
+- **Key Contributions**: Industrial thermodynamic sampling unit (TSU) architecture; Denoising Thermodynamic Computer Architecture (DTCA); THRML compiler
+- **Major Works**:
+  - Jelinčič, Verdon, McCourt et al. (2025). "An Efficient Probabilistic Hardware Architecture for Diffusion-like Models." [arXiv:2510.23972](https://arxiv.org/abs/2510.23972)
+  - "Thermodynamic Computing: From Zero to One" (Extropic, 2025)
+  - "TSU 101: An Entirely New Type of Computing Hardware" (Extropic, 2025)
+  - "Inside X0 and XTR-0" (Extropic, 2025)
+- **Relevance to Zae**: Primary hardware reference for the Substrate pillar; $10{,}000\times$ GPU efficiency claim for diffusion-like inference
+
+#### Andraž Jelinčič, Trevor McCourt
+- **Institution**: Extropic AI
+- **Key Contributions**: Technical implementation of TSU; all-transistor subthreshold CMOS p-bit architecture; DTCA system design
+- **Major Works**:
+  - Jelinčič, Verdon, McCourt et al. (2025) — arXiv:2510.23972 (as above)
+- **Relevance to Zae**: Hardware implementation details for all-transistor TC
+
+### Scaling & Training: The Whitelam Framework
+
+#### Stephen Whitelam
+- **Institution**: Molecular Foundry, Lawrence Berkeley National Laboratory
+- **Key Contributions**: First demonstration of gradient descent (via Onsager-Machlup functional) for TC hardware training; Hierarchical Bilinear Skip Coupling (HBSC) for non-local connectivity; hybrid digital conditioning for eigenvalue concentration problem
+- **Major Works**:
+  - "Training Thermodynamic Computers by Gradient Descent." *PNAS* (2026). [DOI: 10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
+  - Whitelam & Casert. "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." *Nature Communications* (2026). [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
+  - "Thermodynamic Computing Advances with Design and Training." *Nature Communications* 17, 1189 (2026). [Molecular Foundry](https://foundry.lbl.gov/2026/03/06/thermodynamic-computing-advances-with-design-and-training-2/)
+- **Relevance to Zae**: Core training method for SNN-to-TC parameter transfer (Phase 2 implementation target); HBSC is the primary solution to the brain-scale interconnect wall
+
+### Neuromorphic Integration & p-bits
+
+#### Liang Gao et al.
+- **Institution**: (See Micromachines 2025)
+- **Key Contributions**: VCMA-MTJ spintronic p-bit arrays in neuromorphic architecture; SqueezeNet CIFAR-10 classification on stochastic hardware
+- **Major Works**:
+  - "Stochastic Neuromorphic Computing Architecture based on VCMA-MTJ." *Micromachines* 17(2), 216 (2025). [DOI: 10.3390/mi17020216](https://www.mdpi.com/2072-666X/17/2/216)
+- **Relevance to Zae**: Demonstrates p-bit-based neural classification; hardware baseline for spintronic TC
+
+#### Maxwell Aifer et al.
+- **Institution**: (See npj Unconventional Computing 2024)
+- **Key Contributions**: Formal proof and demonstration of $O(N)$ thermodynamic speedup for linear algebra operations (linear solve, matrix inversion, matrix exponentiation)
+- **Major Works**:
+  - "Thermodynamic Linear Algebra." *npj Unconventional Computing* 1, 13 (2024). [Nature](https://www.nature.com/articles/s44335-024-00013-3)
+- **Relevance to Zae**: Mathematical foundation for thermodynamic second-order optimization (K-FAC)
+
+### Foundational Papers
+
+1. Conte, Hylton et al. (2019). "Thermodynamic Computing." CCC Workshop. [arXiv:1911.01968](https://arxiv.org/abs/1911.01968)
+2. Jelinčič, Verdon, McCourt et al. (2025). "An Efficient Probabilistic Hardware Architecture for Diffusion-like Models." [arXiv:2510.23972](https://arxiv.org/abs/2510.23972)
+3. Whitelam, S. (2026). "Training Thermodynamic Computers by Gradient Descent." *PNAS*. [DOI:10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
+4. Whitelam, S. & Casert, C. (2026). "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." *Nature Communications*. [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
+5. Aifer, M. et al. (2024). "Thermodynamic Linear Algebra." *npj Unconventional Computing* 1:13.
+6. (Authors TBC) (2025). "Accelerating K-FAC with Thermodynamic Hardware." [arXiv:2502.08603](https://arxiv.org/html/2502.08603v1)
+7. Gao, L. et al. (2025). "Stochastic Neuromorphic Computing Architecture based on VCMA-MTJ." *Micromachines* 17(2):216.
+8. (Authors TBC) (2025). "A Neuristor based on Single Transistor Latch (STL) in CMOS." *Nature Electronics / ACS Nano*. [DOI:10.1021/acsnano.5c15076](https://pubs.acs.org/doi/10.1021/acsnano.5c15076)
+9. (Authors TBC) (2025). "Spiking STDP Transformer (S²TDPT)." [arXiv:2511.14691](https://arxiv.org/html/2511.14691v1)
 
 ---
 

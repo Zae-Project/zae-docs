@@ -459,6 +459,42 @@
 
 ---
 
+## 13. THERMODYNAMIC COMPUTING & STOCHASTIC SUBSTRATES
+
+### Core Concepts
+
+- **Thermodynamic Computing (TC)**: A computing paradigm that uses physical systems in contact with a thermal bath to perform computation, treating thermal noise as a resource rather than noise to be suppressed
+- **Langevin Equation (overdamped)**: The stochastic differential equation governing TC hardware: $\dot{x}_i = -\mu\,\partial_i V_\theta(x) + \sqrt{2\mu k_B T}\,\eta_i(t)$. Defines how physical degrees of freedom evolve under a programmable energy landscape plus thermal noise
+- **Boltzmann-Gibbs Distribution**: The equilibrium probability distribution of a thermodynamic system: $\rho(x) \propto e^{-V_\theta(x)/k_BT}$. Programming the energy $V_\theta$ = programming the target distribution
+- **Landauer's Principle**: The minimum energy required to erase one bit of information is $k_B T \ln 2 \approx 2.8 \times 10^{-21}$ J at room temperature (300 K). Sets the theoretical lower bound for computation energy
+- **Thermal Stability Factor ($\Delta$)**: In magnetic devices, $\Delta = E_b / k_B T$ where $E_b$ is the energy barrier height. Low $\Delta$ (<25) = spontaneous fluctuation (p-bit behavior); high $\Delta$ (>60) = stable bit (conventional memory)
+- **Energy-Delay-Deficiency Product (EDDP)**: Performance metric for probabilistic hardware: $EDDP = W_{\text{diss}} \cdot \tau \cdot (1 - Q)$, where $W_{\text{diss}}$ = dissipated work, $\tau$ = computation time, $Q$ = accuracy
+
+### Hardware Primitives
+
+- **Probabilistic Bit (p-bit)**: A hardware element that fluctuates between 0 and 1 with a tunable probability $P(\text{up}) = \sigma(\beta V) = 1/(1+e^{-\beta V})$. The fundamental building block of thermodynamic neural networks
+- **Magnetic Tunnel Junction (MTJ)**: A spintronic device consisting of two ferromagnetic layers separated by a thin insulating barrier; used as a p-bit when thermal stability factor $\Delta < 25$
+- **Spin-Transfer Torque (STT)**: Mechanism for switching MTJ magnetization using spin-polarized current
+- **Spin-Orbit Torque (SOT)**: Mechanism for MTJ switching using spin-Hall effect in a heavy-metal underlayer; faster and more energy-efficient than STT
+- **Voltage-Controlled Magnetic Anisotropy (VCMA)**: Ultra-low-power MTJ switching via electric-field modulation of the anisotropy barrier; minimal Joule heating
+- **Subthreshold CMOS**: MOSFET operation below the threshold voltage where current is dominated by thermal diffusion; provides a natural source of intense thermal noise for all-transistor p-bit implementation
+- **Neuristor**: A CMOS-compatible artificial neuron exhibiting leaky integrate-and-fire (LIF) behavior, implemented via the Single-Transistor Latch (STL) mechanism; supports dual stochastic/deterministic modes
+- **Single-Transistor Latch (STL)**: MOSFET circuit mechanism enabling both stochastic spiking (impact ionization) and deterministic LIF modes in the same device
+- **Thermodynamic Sampling Unit (TSU)**: Extropic AI's hardware implementation of a thermodynamic computer; an array of all-transistor stochastic sampling cells
+
+### Algorithms & Architectures
+
+- **Denoising Thermodynamic Model (DTM)**: An architecture where each hardware EBM performs a single denoising step rather than acting as a monolithic model; resolves the mixing-expressivity tradeoff; analogous to diffusion models
+- **Denoising Thermodynamic Computer Architecture (DTCA)**: A system of sparse, locally connected Boltzmann machine arrays implementing DTMs; achieves $\sim 10^4\times$ energy improvement vs. GPU for diffusion-like inference
+- **Hierarchical Bilinear Skip Coupling (HBSC)**: A technique using rank-$k$ SVD approximation of encoder/decoder Gram matrices to implement non-local skip connections with $O(Dk)$ wiring instead of $O(D^2)$; reduces interconnect wall for brain-scale TC
+- **Onsager-Machlup Functional**: The path-probability functional of Langevin dynamics, used to derive gradient descent update rules for TC hardware parameters; enables gradient-based training of physical TC hardware
+- **Energy-Based Model (EBM)**: A probabilistic model that defines a distribution via a scalar energy function $E_\theta(x)$; TC hardware naturally implements EBMs via the Boltzmann-Gibbs distribution
+- **THRML (Thermodynamic Hypergraphical Model Library)**: JAX-based Python library for building and sampling probabilistic graphical models on TC hardware; the primary software interface to TSU hardware
+- **Thermodynamic K-FAC**: Second-order optimization method combining Kronecker-Factored Approximate Curvature with thermodynamic hardware, reducing matrix inversion cost from $O(B^3)$ to $O(B)$; enables natural gradient descent at first-order computational cost
+- **Stochastic Spiking Neural Network (SSNN)**: A neural network integrating thermodynamic p-bits into a neuromorphic architecture; replicates probabilistic computation of biological neurons
+
+---
+
 ## USAGE RECOMMENDATIONS BY PUBLICATION TARGET
 
 ### For Medical Hypotheses (Clinical/Neuroscience Audience):

@@ -15,6 +15,7 @@
 5. [Whole Brain Emulation Theorists](#whole-brain-emulation-theorists)
 6. [Industry Leaders](#industry-leaders)
 7. [Research Institutions \& Centers](#research-institutions--centers)
+8. [Thermodynamic Computing Researchers](#thermodynamic-computing-researchers) *(new)*
 
 ---
 
@@ -386,6 +387,67 @@
 - **Technology**: 1 million ARM cores for real-time neural simulation
 - **Website**: http://apt.cs.manchester.ac.uk/projects/SpiNNaker/
 - **Relevance to Zae**: Scalable SNN simulation platform
+
+---
+
+## Thermodynamic Computing Researchers
+
+### Todd Hylton
+- **Current Position**: Consultant / Retired DARPA Program Manager
+- **Previous**: DARPA Information Innovation Office; HP Labs
+- **Research Focus**: Thermodynamic computing architecture, evolvable systems, physics-based AI
+- **Notable**: Co-author of the CCC Workshop Report (2019) that defined thermodynamic computing as a field; authored the *Thermodynamic Computing* book (River Publishers, 2020)
+- **Key Contribution**: Manifesto-level framing of TC; "evolvable core" architecture paradigm
+- **Relevance to Zae**: Foundational theoretical framework for the Substrate pillar
+
+### Stephen Whitelam
+- **Current Position**: Staff Scientist, Molecular Foundry, Lawrence Berkeley National Laboratory (LBNL)
+- **Research Focus**: Statistical mechanics of machine learning; stochastic dynamics; thermodynamic computing
+- **Notable**: First demonstration of gradient-descent training for TC hardware via Onsager-Machlup functionals; developer of Hierarchical Bilinear Skip Coupling (HBSC)
+- **Key Publications**:
+  - "Training Thermodynamic Computers by Gradient Descent" (*PNAS* 2026)
+  - "Thermodynamic Diffusion Inference with Minimal Digital Conditioning" (*Nature Communications* 2026, with Corneel Casert) — arXiv:2604.14332
+  - "Thermodynamic Computing Advances with Design and Training" (*Nature Communications* 17:1189, 2026)
+- **Lab**: Molecular Foundry, LBNL — [foundry.lbl.gov](https://foundry.lbl.gov)
+- **Relevance to Zae**: Core training algorithm (Onsager-Machlup GD) and HBSC are Phase 2 implementation targets
+
+### Guillaume Verdon
+- **Current Position**: Founder & CEO, Extropic AI
+- **Previous**: Google Quantum AI; University of Waterloo (PhD)
+- **Research Focus**: Thermodynamic sampling units; energy-based machine learning; quantum-classical hybrid computing
+- **Notable**: Founded Extropic AI to commercialize thermodynamic computing; architect of the TSU (Thermodynamic Sampling Unit) and DTCA
+- **Key Publications**:
+  - Jelinčič, Verdon, McCourt et al. (2025). arXiv:2510.23972
+  - "Thermodynamic Computing: From Zero to One" (Extropic, 2025)
+  - "TSU 101: An Entirely New Type of Computing Hardware" (Extropic, 2025)
+- **Website**: [extropic.ai](https://extropic.ai)
+- **Relevance to Zae**: Lead developer of the primary TC hardware platform; $10{,}000\times$ GPU efficiency claim is the core efficiency argument for the Substrate pillar
+
+### Andraž Jelinčič
+- **Current Position**: Researcher, Extropic AI
+- **Research Focus**: Probabilistic hardware architectures; thermodynamic diffusion models; all-transistor stochastic computing
+- **Notable**: Lead author of the core TSU architecture paper (arXiv:2510.23972)
+- **Key Publications**:
+  - Jelinčič, Verdon, McCourt et al. (2025). "An Efficient Probabilistic Hardware Architecture for Diffusion-like Models." arXiv:2510.23972
+- **Relevance to Zae**: Primary hardware reference author for the Substrate pillar
+
+### Trevor McCourt
+- **Current Position**: Researcher, Extropic AI
+- **Research Focus**: Thermodynamic hardware; probabilistic computing; energy-based learning
+- **Notable**: Co-author of the TSU architecture paper
+- **Key Publications**:
+  - Jelinčič, Verdon, McCourt et al. (2025). arXiv:2510.23972
+- **Relevance to Zae**: TC hardware architecture co-developer
+
+### Supriyo Datta
+- **Current Position**: Thomas Duncan Distinguished Professor of Electrical and Computer Engineering, Purdue University
+- **Research Focus**: Nano-devices; spintronics; probabilistic computing; p-bit concept originator
+- **Notable**: Originator of the p-bit (probabilistic bit) concept and the Boltzmann machine hardware analogy; foundational theoretical work underpinning all spintronic TC approaches
+- **Google Scholar**: [scholar.google.com](https://scholar.google.com/citations?user=s9CrMcYAAAAJ)
+- **Key Publications** (selected relevant):
+  - "Probabilistic spin logic for energy-efficient computing" — *Nature Electronics* 2019
+  - "p-bits for probabilistic spin logic" — *Applied Physics Letters* 2017
+- **Relevance to Zae**: Theoretical originator of the p-bit paradigm; his Boltzmann machine hardware framework underlies VCMA-MTJ and subthreshold CMOS TC implementations
 
 ---
 
