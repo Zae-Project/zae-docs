@@ -1,21 +1,22 @@
 # Unified Consciousness Substrate Platform Architecture
 
-**Version**: 1.0.0  
-**Last Updated**: January 2026  
-**Status**: Active Development  
+**Version**: 1.1.0
+**Last Updated**: April 2026
+**Status**: Active Development
 **Classification**: Private/Internal
 
 ---
 
 ## Executive Summary
 
-The **Zae Platform** is a unified system for seamless biological-to-synthetic consciousness substrate transfer. It comprises three interconnected projects that together form a complete vertical stack:
+The **Zae Platform** is a unified system for seamless biological to synthetic consciousness substrate transfer. It comprises four interconnected projects that together form a complete vertical stack:
 
-1. **ArkSpace.me** - The Infrastructure Layer (Satellite Compute Clusters)
-2. **MindTransfer.me** - The Interface Layer (Corpus Callosum BCI)
-3. **TheConsciousness.ai** - The Software Layer (SNN & Neural Firewall)
+1. **ArkSpace.me**. The Infrastructure Layer (Satellite Compute Clusters)
+2. **MindTransfer.me**. The Interface Layer (Corpus Callosum BCI)
+3. **TheConsciousness.ai**. The Software Layer (SNN and Neural Firewall)
+4. **The Substrate**. The Thermodynamic Computing Layer (p-bits, Langevin dynamics)
 
-This document serves as the single source of truth for understanding how these projects integrate to achieve the goal of substrate-independent consciousness.
+This document is the overview. Deep dives live in [data-flow-architecture.md](./data-flow-architecture.md), [latency-budget-analysis.md](./latency-budget-analysis.md), and [security-architecture.md](./security-architecture.md). Cross-pillar interface contracts live under [../integration/](../integration/).
 
 ---
 
@@ -188,9 +189,9 @@ This document serves as the single source of truth for understanding how these p
 
 ### 4. The Substrate - Thermodynamic Computing Layer
 
-**Mission**: Define the physical computing paradigm that makes brain-scale emulation energetically viable — computation by thermal relaxation rather than deterministic switching.
+**Mission**: Define the physical computing paradigm that makes brain-scale emulation energetically viable. Computation by thermal relaxation rather than deterministic switching.
 
-**Core Concept**: Current digital CMOS dissipates energy $10^6$–$10^9\times$ above the thermodynamic lower bound ($k_B T \ln 2 \approx 2.8 \times 10^{-21}$ J). A 100M-neuron satellite payload at 50–200W is not achievable with von Neumann architectures. Thermodynamic computing — where physical systems relax toward equilibrium to perform inference — targets operation near this bound.
+**Core Concept**: Current digital CMOS dissipates energy $10^6$–$10^9\times$ above the thermodynamic lower bound ($k_B T \ln 2 \approx 2.8 \times 10^{-21}$ J). A 100M-neuron satellite payload at 50–200W is not achievable with von Neumann architectures. Thermodynamic computing, where physical systems relax toward equilibrium to perform inference, targets operation near this bound.
 
 **Core Components**:
 
@@ -214,6 +215,8 @@ This document serves as the single source of truth for understanding how these p
 ---
 
 ## Data Flow Architecture
+
+> See [data-flow-architecture.md](./data-flow-architecture.md) for the full specification, including encoding schemes, protocol stack per segment, QoS classes, failure modes, and the thermodynamic substrate boundary.
 
 ### Signal Path: Brain → Satellite → Brain
 
@@ -263,6 +266,8 @@ Neural Activity                     Satellite SNN                         Motor 
 
 ## Latency Budget Analysis
 
+> See [latency-budget-analysis.md](./latency-budget-analysis.md) for the full specification, including per-stage p99 and jitter budgets, timing failure modes, mitigation strategies, and the TC substrate timing contribution.
+
 ### The Libet Buffer
 
 Benjamin Libet's experiments demonstrated that conscious awareness lags neural events by approximately **350ms** (often cited as ~500ms). This provides a temporal buffer for satellite communication.
@@ -306,6 +311,8 @@ LIBET TEMPORAL BUFFER
 ---
 
 ## Security Architecture
+
+> See [security-architecture.md](./security-architecture.md) for the full specification, including the extended threat model, trust zones, key management lifecycle, defense-in-depth layers, TC substrate security role, and post-quantum stance.
 
 ### Threat Model: Brainjacking
 
@@ -462,6 +469,7 @@ LIBET TEMPORAL BUFFER
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0.0 | Jan 2026 | Zae Team | Initial unified architecture |
+| 1.1.0 | Apr 2026 | Zae Team | Executive summary updated to four pillars. Data Flow, Latency Budget, and Security sections linked to the new standalone deep-dive docs. |
 
 ---
 

@@ -25,7 +25,10 @@ This repository contains the unified architecture documentation for the **Zae** 
 zae-docs/
 ├── README.md                                      # This file
 ├── architecture/
-│   └── unified-platform-architecture.md           # Master architecture document
+│   ├── unified-platform-architecture.md           # Master architecture document
+│   ├── data-flow-architecture.md                  # End-to-end data plane deep dive
+│   ├── latency-budget-analysis.md                 # RTT decomposition and jitter budget
+│   └── security-architecture.md                   # Neural security stack deep dive
 ├── integration/
 │   ├── arkspace-mindtransfer-interface.md         # ArkSpace ↔ MindTransfer contracts
 │   ├── arkspace-consciousness-interface.md        # ArkSpace ↔ Consciousness contracts
@@ -45,6 +48,9 @@ zae-docs/
 ## Quick Links
 
 - [Unified Platform Architecture](./architecture/unified-platform-architecture.md)
+- [Data Flow Architecture](./architecture/data-flow-architecture.md)
+- [Latency Budget Analysis](./architecture/latency-budget-analysis.md)
+- [Security Architecture](./architecture/security-architecture.md)
 - [ARK Space Week Roadmap](./roadmap/ark-space-week.md)
 - [Technical Glossary](./glossary/technical-glossary.md)
 - [Research Bibliography](./reference/bibliography.md) - 100+ researchers, 50+ papers, 35+ books
