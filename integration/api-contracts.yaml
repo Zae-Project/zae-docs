@@ -1,14 +1,22 @@
 # Zae Project - Cross-Project API Contracts
-# Version: 1.0.0
-# Last Updated: January 14, 2026
+# Version: 1.1.0
+# Last Updated: May 23, 2026
 # Classification: Internal
+#
+# 1.1.0 changes (May 2026):
+#   - Added four interface blocks to cover all six cross-pillar pairs:
+#       mindtransfer_consciousness, thermodynamic_consciousness,
+#       thermodynamic_arkspace, thermodynamic_brain_emulation.
+#   - Original 1.0.0 only covered arkspace_mindtransfer and arkspace_consciousness.
+#   - Substrate pillar (thermodynamic-core) was added to the platform in April 2026
+#     and was not represented in 1.0.0.
 
 apiVersion: zae-project.org/v1
 kind: APIContract
 metadata:
   name: unified-api-contracts
-  description: Machine-readable interface contracts between ArkSpace, MindTransfer, and Consciousness projects
-  version: "1.0.0"
+  description: Machine-readable interface contracts across all four pillars (ArkSpace, MindTransfer, Consciousness, Substrate)
+  version: "1.1.0"
   classification: Internal
 
 ---
@@ -564,6 +572,336 @@ arkspace_consciousness:
               affected_sessions: {type: "array", items: {type: "string"}}
               timestamp: {type: "string", format: "date-time"}
               actions_taken: {type: "array", items: {type: "string"}}
+
+---
+# MINDTRANSFER ↔ CONSCIOUSNESS INTERFACE
+# Source spec: zae-docs/integration/mindtransfer-consciousness-interface.md (695 lines)
+---
+
+mindtransfer_consciousness:
+  interface_name: "Brain ↔ SNN Engine Stream"
+  version: "1.0.0"
+  status: "Draft"
+
+  protobuf_schemas:
+
+    # UPLINK: BCI → SNN Engine
+    biological_spike_stream:
+      message_name: "BiologicalSpikeStream"
+      direction: "BRAIN_TO_SNN"
+      priority: "REALTIME"
+
+      fields:
+        - {name: "session_id", type: "uint64", required: true}
+        - {name: "timestamp_ns", type: "uint64", required: true}
+        - {name: "sequence", type: "uint32", required: true}
+        - {name: "spike_events", type: "repeated SpikeEvent", required: true}
+        - {name: "lfp_summary", type: "repeated LFPSummary", required: false}
+
+      nested_types:
+        spike_event:
+          fields:
+            - {name: "electrode_id", type: "uint16"}
+            - {name: "channel_id", type: "uint8"}
+            - {name: "neuron_id", type: "uint32", description: "Sorted neuron identity"}
+            - {name: "timestamp_offset_us", type: "uint16"}
+            - {name: "amplitude_uV", type: "int16"}
+            - {name: "waveform_features", type: "float16[8]", description: "Extracted spike shape"}
+            - {name: "confidence", type: "float16", description: "Spike sorting confidence"}
+
+        lfp_summary:
+          fields:
+            - {name: "region_id", type: "uint8"}
+            - {name: "power_spectrum", type: "float16[8]", description: "Frequency band powers"}
+            - {name: "phase", type: "float16"}
+
+      performance_requirements:
+        max_latency_ms: 5
+        encryption: "AES-256-GCM"
+        compression: "none"
+        packet_rate_per_second: [10000, 50000]
+
+    # DOWNLINK: SNN Engine → BCI
+    snn_stim_command:
+      message_name: "SNNStimCommand"
+      direction: "SNN_TO_BRAIN"
+      priority: "REALTIME"
+
+      fields:
+        - {name: "session_id", type: "uint64", required: true}
+        - {name: "timestamp_ns", type: "uint64", required: true}
+        - {name: "sequence", type: "uint32", required: true}
+        - {name: "safety_signature", type: "bytes", description: "32 bytes, signed by Neural Firewall"}
+        - {name: "stimulation_events", type: "repeated StimulationEvent", required: true}
+
+      nested_types:
+        stimulation_event:
+          fields:
+            - {name: "electrode_id", type: "uint16"}
+            - {name: "target_neuron_type", type: "TargetNeuronType enum"}
+            - {name: "amplitude_uA", type: "int16"}
+            - {name: "pulse_width_us", type: "uint16"}
+            - {name: "waveform", type: "WaveformType enum"}
+            - {name: "inter_pulse_interval_us", type: "uint16"}
+            - {name: "train_duration_ms", type: "uint8"}
+            - {name: "execution_time_ns", type: "uint64", description: "When to execute"}
+            - {name: "max_delay_tolerance_ms", type: "uint8"}
+
+        target_neuron_type:
+          enum_values: ["EXCITATORY", "INHIBITORY"]
+
+        waveform_type:
+          enum_values: ["MONOPHASIC_CATHODIC", "MONOPHASIC_ANODIC", "BIPHASIC_CATHODIC_FIRST", "BIPHASIC_ANODIC_FIRST", "CHARGE_BALANCED_SYMMETRIC"]
+
+      safety_limits:
+        max_amplitude_uA: 100
+        max_charge_per_phase_nC: 50
+        max_frequency_hz: 200
+        max_duty_cycle_percent: 50
+        min_inter_train_interval_ms: 10
+
+      performance_requirements:
+        max_latency_ms: 5
+        encryption: "AES-256-GCM"
+
+    # SNN → MindTransfer encoding feedback
+    prediction_feedback:
+      message_name: "PredictionFeedback"
+      direction: "SNN_TO_BRAIN"
+      priority: "HIGH"
+      description: "Generative model predictions used by MindTransfer to compress redundant uplink data"
+
+      fields:
+        - {name: "session_id", type: "uint64"}
+        - {name: "timestamp_ns", type: "uint64"}
+        - {name: "prediction_frame_id", type: "uint32"}
+        - {name: "predicted_spikes", type: "repeated PredictedSpike"}
+        - {name: "error_corrections", type: "repeated ErrorCorrection"}
+        - {name: "encoding_parameters", type: "EncodingHints"}
+
+---
+# THERMODYNAMIC ↔ CONSCIOUSNESS INTERFACE
+# Source spec: zae-docs/integration/thermodynamic-consciousness-interface.md (128 lines)
+---
+
+thermodynamic_consciousness:
+  interface_name: "Substrate ↔ SNN Engine"
+  version: "0.1.0"
+  status: "Draft (TRL 2)"
+  description: "Offline training and runtime inference contract between TC substrate and the SNN engine"
+
+  protobuf_schemas:
+
+    # SNN Engine → TC Substrate (offline parameter transfer)
+    tc_parameter_set:
+      message_name: "TCParameterSet"
+      direction: "SNN_TO_TC"
+      priority: "OFFLINE"
+      description: "Trained (J,b) parameters from SNN engine, ready for programming into TSU non-volatile memory"
+
+      fields:
+        - {name: "model_id", type: "string", format: "uuid"}
+        - {name: "model_version", type: "string"}
+        - {name: "neuron_count", type: "uint32"}
+        - {name: "coupling_matrix_J", type: "SparseMatrix", description: "J[i,j] excitatory→negative, inhibitory→positive"}
+        - {name: "bias_vector_b", type: "float32[]"}
+        - {name: "temperature_kT", type: "float32", description: "Operating temperature for TC substrate"}
+        - {name: "signature", type: "bytes", description: "Cryptographic signature for parameter integrity"}
+        - {name: "trained_at", type: "string", format: "date-time"}
+
+      fidelity_requirements:
+        activation_cosine_similarity_min: 0.99
+        spike_timing_correlation_min: 0.90
+        generative_quality_within_baseline_percent: 5
+
+    # TC Substrate → SNN Engine (runtime inference)
+    tc_inference_output:
+      message_name: "TCInferenceOutput"
+      direction: "TC_TO_SNN"
+      priority: "REALTIME"
+      description: "Equilibrium sample from TC Langevin relaxation, consumed by SNN runtime"
+
+      fields:
+        - {name: "session_id", type: "uint64"}
+        - {name: "timestamp_ns", type: "uint64"}
+        - {name: "model_id", type: "string", format: "uuid"}
+        - {name: "sample_format", type: "SampleFormat enum"}
+        - {name: "sample_data", type: "bytes", description: "Format depends on sample_format"}
+        - {name: "dtm_step_index", type: "uint32", description: "Which step in the DTM chain"}
+        - {name: "anomaly_score", type: "float32", description: "Output distribution shift indicator for firewall"}
+
+      nested_types:
+        sample_format:
+          enum_values: ["BOLTZMANN_BINARY", "ISING_CONTINUOUS", "LANGEVIN_TRAJECTORY"]
+
+    # Digital conditioning (bias vector injection)
+    digital_conditioning_input:
+      message_name: "DigitalConditioningInput"
+      direction: "SNN_TO_TC"
+      priority: "REALTIME"
+      description: "Per-step bias vectors computed by SNN host, anchoring TC substrate to input"
+
+      fields:
+        - {name: "session_id", type: "uint64"}
+        - {name: "timestamp_ns", type: "uint64"}
+        - {name: "bias_enc", type: "float32[]", description: "Encoder bias vector"}
+        - {name: "bias_dec", type: "float32[]", description: "Decoder bias vector"}
+        - {name: "step_index", type: "uint32"}
+
+  performance_requirements:
+    digital_conditioning_compute_ms: {target: 2, maximum: 5}
+    tc_langevin_relaxation_per_dtm_step_ms: {target: 10, maximum: 20}
+    full_dtm_inference_chain_ms: {target: 30, maximum: 50}
+    libet_buffer_remaining_ms: {minimum: 200}
+
+  security:
+    parameter_integrity: "Cryptographic signing of {J,b} at programming time, verified before NVM write"
+    inference_channel: "AES-256 on digital conditioning bus"
+    output_anomaly_detection: "Distribution-shift monitoring on TC equilibrium samples"
+
+---
+# THERMODYNAMIC ↔ ARKSPACE INTERFACE
+# Source spec: zae-docs/integration/thermodynamic-arkspace-interface.md (139 lines)
+---
+
+thermodynamic_arkspace:
+  interface_name: "Substrate ↔ Orbital Payload"
+  version: "0.1.0"
+  status: "Draft (TRL 1-2)"
+  description: "TC hardware as the proposed physical computing paradigm for arkspace-core neural payloads"
+
+  hardware_contracts:
+
+    power_budget:
+      tsu_array_watts: {maximum: 100, description: "p-bit sampling cells"}
+      digital_conditioning_processor_watts: {maximum: 20, description: "ARM/RISC-V running bias-vector computation"}
+      nvm_parameter_memory_watts: {maximum: 5, description: "Stores {J,b}; embedded MRAM preferred"}
+      thermal_control_subsystem_watts: {maximum: 30, description: "Active control to stabilize kT"}
+      total_payload_watts: {maximum: 200, description: "Per arkspace-core specification"}
+
+    thermal_interface:
+      operating_temperature_K: {min: 280, max: 320, description: "Stable kT range; avoids LEO -40 to +80C extremes"}
+      temperature_variation_tolerance_K: 5
+      active_thermal_control_required: true
+
+    radiation_environment:
+      target_tid_tolerance_krad_si: 30
+      mission_duration_years: 2
+      seu_response: "Random p-bit state flip; tolerable in stochastic architecture; characterization pending"
+      tid_response: "Subthreshold transistor threshold shift; mitigated by periodic theta recalibration via uplink"
+      thermal_cycling_mitigation: "Active thermal control (see thermal_interface)"
+
+  protobuf_schemas:
+
+    # Ground → TSU (parameter delta uplink)
+    tc_parameter_uplink:
+      message_name: "TCParameterUplink"
+      direction: "GROUND_TO_SAT"
+      priority: "BULK"
+      description: "Theta-update payload; delta-encoded against current TSU parameter state"
+
+      fields:
+        - {name: "payload_id", type: "string", format: "uuid"}
+        - {name: "target_node_id", type: "string"}
+        - {name: "model_id", type: "string", format: "uuid"}
+        - {name: "parameter_delta", type: "bytes", description: "Compressed delta of {J,b}; vendor-specific format"}
+        - {name: "delta_baseline_version", type: "string"}
+        - {name: "new_version", type: "string"}
+        - {name: "signature", type: "bytes", description: "Cryptographic signature verified before NVM programming"}
+        - {name: "encryption", type: "string", const: "AES-256-GCM"}
+
+      performance_requirements:
+        uplink_bandwidth_class: "BULK (not on motor loop)"
+        signature_verification_required: true
+
+    # OISL packetization of TC output
+    tc_oisl_egress:
+      message_name: "TCOISLEgress"
+      direction: "PAYLOAD_INTERNAL"
+      priority: "REALTIME"
+      description: "Conversion from TC equilibrium sample to OISL spike-event packet"
+
+      conversion_table:
+        - {tc_format: "Boltzmann sample (binary)", oisl_format: "Spike event list", rule: "Each x_i=+1 → spike event at node i"}
+        - {tc_format: "Langevin trajectory (continuous)", oisl_format: "Rate-coded packets", rule: "r_i = (x_i + 1)/2 * r_max"}
+        - {tc_format: "DTM step output", oisl_format: "Streaming sample", rule: "One DTM step → one OISL frame"}
+
+---
+# THERMODYNAMIC ↔ BRAIN-EMULATION INTERFACE
+# Source spec: zae-docs/integration/thermodynamic-brain-emulation-interface.md
+---
+
+thermodynamic_brain_emulation:
+  interface_name: "Substrate ↔ Atlas Translator"
+  version: "0.1.0"
+  status: "Draft (Phase 2 target)"
+  description: "Offline translator from Brian2 atlas templates to TC coupling matrices; canonical implementation lives in brain-emulation/"
+
+  translator_contract:
+
+    input:
+      format_options:
+        - "Brian2 Network object (Python in-memory)"
+        - "Atlas template JSON path (per brain-emulation/data/brain_region_maps/manifest.json schema)"
+
+    output:
+      structure:
+        J:
+          type: "sparse_matrix_float32"
+          description: "Coupling matrix; J[i,j] = -w[i,j] if excitatory else +|w[i,j]|"
+        b:
+          type: "float32[]"
+          description: "Bias vector; b[i] = I_bias[i]"
+        kT:
+          type: "float32"
+          description: "Temperature consistent with template noise envelope"
+        metadata:
+          neuron_count: "uint32"
+          source_template_id: "string"
+          step_count: "uint32"
+          temporal_resolution_ms: "float32"
+
+    api:
+      python_signature: "CouplingMatrix.from_brian2_network(network) -> (J, b, kT)"
+      backend_reference: "NumPy required; JAX optional"
+      implementation_home: "brain-emulation/"
+
+    validation_criterion:
+      metric: "Activation cosine similarity"
+      threshold: 0.99
+      reference: "Brian2 realistic-mode run on the same template (Whitelam and Casert 2026 benchmark)"
+
+    failure_mode: "Typed error on unmappable Brian2 features (multi-compartment, gap junctions, custom equations); never silent degrade"
+
+  shared_benchmarks:
+    mnist:
+      brain_emulation_side: "Brian2 LIF classifier"
+      tc_side: "RBM / DTCA classifier (thermodynamic-core/sims/boltzmann/)"
+      metric: "Top-1 accuracy"
+      target: "Within 5 percent parity"
+
+    allen_motor_cortex:
+      brain_emulation_side: "Realistic-mode Brian2 simulation of Allen_Motor_Cortex template"
+      tc_side: "TC Langevin sampling on translated (J,b,kT)"
+      metrics:
+        - "Firing-rate distribution KL divergence"
+        - "Pairwise correlation matrix Frobenius distance"
+
+    split_brain:
+      brain_emulation_side: "Two coupled Brian2 hemispheres with corpus-callosum severance"
+      tc_side: "Two coupled TC substrates with the same severance"
+      metric: "Hemispheric independence statistic"
+      cross_reference: "neutral-consciousness-engine/ros2_ws/.../tests/split_brain_test.py"
+
+  performance_requirements:
+    translation_runtime_s_per_template: {target: 5, maximum: 10, hardware: "CPU"}
+    translator_peak_memory_gb: {maximum: 4}
+    brian2_validation_run_minutes: {maximum: 5}
+    realtime_constraint: "none (not on motor loop)"
+
+  security:
+    template_sensitivity: "Open scientific data; not sensitive"
+    derived_parameter_handling: "If (J,b) loaded into production payload, falls under security-architecture.md §10.1 (parameter memory as high-value target); signing happens downstream in the orbital-uplink path, not in the translator"
 
 ---
 # SECURITY CONTRACTS (ALL INTERFACES)

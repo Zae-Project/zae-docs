@@ -2,7 +2,9 @@
 
 **Sprint Duration**: 7 Days
 **Focus**: ArkSpace.me Infrastructure Layer Setup
-**Status**: Completed
+**Status**: Historical (Q1 2026 sprint, archived May 2026)
+
+> **Archived.** This file documents the Q1 2026 organization-setup sprint. Day-by-day checkboxes below were left unchecked at the time and have not been retroactively updated. For current arkspace-core phase state, see [arkspace-core/roadmap/milestones.md](https://github.com/Zae-Project/arkspace-core/blob/main/roadmap/milestones.md), which is the authoritative source. Phase 1 (Q1 2026) is marked completed January 14, 2026 in that file. The Zae Project moved past the ARK Space Week framing in February 2026.
 
 ---
 
