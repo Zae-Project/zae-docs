@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repository contains the unified architecture documentation for the **Zae** organization a GitHub organization that coordinates three interconnected projects forming a complete system for seamless biological-to-synthetic consciousness substrate transfer.
+This repository contains the unified architecture documentation for the **Zae** organization, a GitHub organization that coordinates four interconnected projects forming a complete system for biological to synthetic consciousness substrate transfer.
 
 ## The Four Pillars
 
@@ -15,7 +15,7 @@ This repository contains the unified architecture documentation for the **Zae** 
 | **ArkSpace.me** | 🛰️ Infrastructure | Satellite Compute Clusters | [arkspace-core](https://github.com/Zae-Project/arkspace-core) | [arkspace.me](https://arkspace.me) |
 | **MindTransfer.me** | 🧠 Interface | Corpus Callosum BCI | [brain-emulation](https://github.com/Zae-Project/brain-emulation) | [mindtransfer.me](https://mindtransfer.me) |
 | **TheConsciousness.ai/core** | ⚡ Engine | SNN & Neural Firewall | [neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) | [theconsciousness.ai/core](https://theconsciousness.ai/core) |
-| **The Substrate** | 🌡️ Substrate | Thermodynamic Computing | [thermodynamic-core](https://github.com/Zae-Project/thermodynamic-core) | — |
+| **The Substrate** | 🌡️ Substrate | Thermodynamic Computing | [thermodynamic-core](https://github.com/Zae-Project/thermodynamic-core) | n/a |
 
 > **Note**: The main [theconsciousness.ai](https://theconsciousness.ai) site covers generic Artificial Consciousness research. The **/core** subsite specifically covers the Consciousness Substrate Transfer project (Neutral Consciousness Engine).
 
@@ -41,7 +41,7 @@ zae-docs/
 ├── glossary/
 │   └── technical-glossary.md                      # Unified terminology
 └── reference/
-    ├── bibliography.md                            # Comprehensive research bibliography
+    ├── bibliography.md                            # Research bibliography
     └── researchers-directory.md                  # Key researchers and institutions
 ```
 
@@ -58,10 +58,10 @@ zae-docs/
 
 ## Research Resources
 
-The `/reference/` directory contains comprehensive research materials that establish the intellectual foundations for the Zae Project:
+The `/reference/` directory contains the research materials that establish the intellectual foundations for the Zae Project:
 
 ### [Bibliography](./reference/bibliography.md)
-Comprehensive compilation of research across six key domains:
+Compilation of research across eight domains:
 - **100+ Key Researchers** - Leading scientists in consciousness, BCIs, neuromorphic computing, WBE, neuroscience
 - **50+ Foundational Papers** - Seminal publications with full citations
 - **35+ Essential Books** - Organized by topic with reading recommendations
@@ -79,7 +79,7 @@ Detailed profiles and contact information:
 
 ## Core Hypothesis
 
-> **Seamless consciousness substrate transfer** is achievable by maintaining a live neural connection between a biological hemisphere and a synthetic counterpart (satellite-based SNN), allowing consciousness to flow into the machine substrate rather than being copied.
+> **Consciousness substrate transfer** is achievable by maintaining a live neural connection between a biological hemisphere and a synthetic counterpart (satellite-based SNN), allowing consciousness to flow into the machine substrate rather than being copied.
 
 This is based on:
 - **Watanabe Transfer Protocol**: Integration of biological hemisphere with "neutral" machine hemisphere

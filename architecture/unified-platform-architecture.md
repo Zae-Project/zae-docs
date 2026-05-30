@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The **Zae Platform** is a unified system for seamless biological to synthetic consciousness substrate transfer. It comprises four interconnected projects that together form a complete vertical stack:
+The **Zae Platform** is a unified system for biological to synthetic consciousness substrate transfer. It comprises four interconnected projects that together form a complete vertical stack:
 
 1. **ArkSpace.me**. The Infrastructure Layer (Satellite Compute Clusters)
 2. **MindTransfer.me**. The Interface Layer (Corpus Callosum BCI)

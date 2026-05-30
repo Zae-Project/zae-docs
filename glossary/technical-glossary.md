@@ -1,5 +1,5 @@
-# Comprehensive Technical Glossary
-## Seamless Consciousness Transfer via Corpus Callosum Interface and Satellite Networks
+# Technical Glossary
+## Consciousness Transfer via Corpus Callosum Interface and Satellite Networks
 
 ---
 
@@ -293,7 +293,7 @@
 - **Uni-Hemispheric Subjective Test**: Proposed protocol testing unified consciousness with synthetic hemisphere
 - **Falsifiable Hypothesis**: Testable prediction that can be proven wrong
 - **Testable Prediction**: Specific experimental outcome if hypothesis correct
-- **Unified Visual Field**: Seamless perception across visual space
+- **Unified Visual Field**: Continuous perception across visual space
 - **Subjective Report**: First-person account of experience
 - **Third-Person Verification**: Objective confirmation of subjective states
 - **Baseline Measurement**: Pre-intervention reference values
@@ -442,7 +442,7 @@
 ### Key Scientists
 - **Roger Sperry**: Nobel laureate for split-brain research (1960s-1980s)
 - **Benjamin Libet**: Researcher studying conscious will and timing (1980s)
-- **Masataka Watanabe**: University of Tokyo professor proposing seamless mind uploading
+- **Masataka Watanabe**: University of Tokyo professor proposing continuity-preserving mind uploading
 - **Karl Friston**: Originator of Free Energy Principle
 - **Giulio Tononi**: Developer of Integrated Information Theory
 - **Stanislas Dehaene**: Global Neuronal Workspace theory
