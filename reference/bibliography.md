@@ -221,12 +221,29 @@ This bibliography represents the intellectual foundations from which the Zae Pro
   - "A 128×128 120 dB 15 μs Latency Asynchronous Temporal Contrast Vision Sensor" (2008)
 - **Relevance to Zae**: Event-driven sensor interfaces for satellite systems
 
+### Space-Qualified & Radiation-Tolerant Neuromorphic
+
+#### BrainChip Akida / Frontgrade Gaisler
+- **Organization**: BrainChip; Frontgrade Gaisler
+- **Key Contributions**: Akida event-based neuromorphic IP integrated into space-grade radiation-tolerant processors for on-orbit inference
+- **Relevance to Zae**: Evidence that neuromorphic IP can run under cosmic radiation and tight power budgets. Directly relevant to the arkspace-core SNN payload radiation-hardening gap.
+
+#### IBM NorthPole
+- **Organization**: IBM Research
+- **Key Contributions**: NorthPole inference accelerator; heavy-ion radiation characterization
+- **Major Works**:
+  - Modha, D. S. et al. (2023). "Neural inference at the frontier of energy, space, and time." *Science* 382(6668), 329-335.
+  - "Artificial Intelligence Performance and Radiation Effects in Neuromorphic NorthPole Hardware." *IEEE* (2025).
+- **Relevance to Zae**: Radiation-test data for a large neuromorphic part; reference for the orbital payload reliability analysis.
+
 ### Foundational Papers
 
 1. **Mead, C.** (1990). "Neuromorphic electronic systems." *Proceedings of the IEEE*, 78(10), 1629-1636.
 2. **Maass, W.** (1997). "Networks of spiking neurons: the third generation of neural network models." *Neural Networks*, 10(9), 1659-1671.
 3. **Eliasmith, C., et al.** (2012). "A large-scale model of the functioning brain." *Science*, 338(6111), 1202-1205.
 4. **Davies, M., et al.** (2018). "Loihi: A neuromorphic manycore processor with on-chip learning." *IEEE Micro*, 38(1), 82-99.
+5. **Modha, D. S., et al.** (2023). "Neural inference at the frontier of energy, space, and time." *Science*, 382(6668), 329-335. (IBM NorthPole)
+6. **(Survey)** (2023). "A Survey Examining Neuromorphic Architecture in Space and Challenges from Radiation." [arXiv:2311.15006](https://arxiv.org/abs/2311.15006)
 
 ---
 
@@ -278,6 +295,16 @@ This bibliography represents the intellectual foundations from which the Zae Pro
   - "Thermodynamic Computing Advances with Design and Training." *Nature Communications* 17, 1189 (2026). [Molecular Foundry](https://foundry.lbl.gov/2026/03/06/thermodynamic-computing-advances-with-design-and-training-2/)
 - **Relevance to Zae**: Core training method for SNN-to-TC parameter transfer (Phase 2 implementation target); HBSC is the primary solution to the brain-scale interconnect wall
 
+### Normal Computing: Carnot Architecture / CN101
+
+#### Normal Computing (Kaelan Donatella, Patrick J. Coles et al.)
+- **Institution**: Normal Computing
+- **Key Contributions**: First thermodynamic-computing chip tape-out (CN101, August 2025); "Carnot" architecture targeting stochastic sampling and linear algebra; thermodynamic second-order optimization (K-FAC acceleration)
+- **Major Works**:
+  - Donatella, K. et al. (2025). "Scalable Thermodynamic Second-order Optimization." [arXiv:2502.08603](https://arxiv.org/abs/2502.08603)
+  - "Normal Computing Announces Tape-Out of World's First Thermodynamic Computing Chip" (CN101, August 2025). 4 compute tiles, 64 state variables each, 256-dimensional problems at 32-bit state.
+- **Relevance to Zae**: Second hardware track for the Substrate pillar beside Extropic. CN101 is silicon evidence for thermodynamic sampling and matrix operations at small scale, with a 2026 roadmap toward larger tile counts.
+
 ### Neuromorphic Integration & p-bits
 
 #### Liang Gao et al.
@@ -301,7 +328,7 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 3. Whitelam, S. (2026). "Training Thermodynamic Computers by Gradient Descent." *PNAS*. [DOI:10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
 4. Whitelam, S. & Casert, C. (2026). "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." *Nature Communications*. [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
 5. Aifer, M. et al. (2024). "Thermodynamic Linear Algebra." *npj Unconventional Computing* 1:13.
-6. (Authors TBC) (2025). "Accelerating K-FAC with Thermodynamic Hardware." [arXiv:2502.08603](https://arxiv.org/html/2502.08603v1)
+6. Donatella, K. et al. (2025). "Scalable Thermodynamic Second-order Optimization." [arXiv:2502.08603](https://arxiv.org/abs/2502.08603) (thermodynamic K-FAC, Normal Computing)
 7. Gao, L. et al. (2025). "Stochastic Neuromorphic Computing Architecture based on VCMA-MTJ." *Micromachines* 17(2):216.
 8. (Authors TBC) (2025). "A Neuristor based on Single Transistor Latch (STL) in CMOS." *Nature Electronics / ACS Nano*. [DOI:10.1021/acsnano.5c15076](https://pubs.acs.org/doi/10.1021/acsnano.5c15076)
 9. (Authors TBC) (2025). "Spiking STDP Transformer (S²TDPT)." [arXiv:2511.14691](https://arxiv.org/html/2511.14691v1)
@@ -430,11 +457,17 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 - **Key Contributions**: CubeSat standard
 - **Relevance to Zae**: Miniaturized satellite platforms
 
+#### TESAT-Spacecom
+- **Organization**: TESAT-Spacecom
+- **Key Contributions**: SCOT80 optical communication terminal (80 mm aperture, up to 100 Gbps), compliant with SDA OCT Standard 3.1 with a path to 4.0
+- **Relevance to Zae**: Concrete OISL terminal reference for the arkspace-core link budget and the OISL neural protocol
+
 ### Standards & Regulatory Bodies
 
 1. **FCC (Federal Communications Commission)** - Part 25 satellite licensing
 2. **ITU (International Telecommunication Union)** - Spectrum coordination
 3. **CCSDS (Consultative Committee for Space Data Systems)** - Space communication protocols
+4. **SDA (Space Development Agency)** - Optical Communications Terminal (OCT) Standard 3.1, interoperability for inter-satellite laser links (path to 4.0)
 
 ### Foundational Papers
 
