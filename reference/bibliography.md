@@ -292,7 +292,7 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 - **Major Works**:
   - "Training Thermodynamic Computers by Gradient Descent." *PNAS* (2026). [DOI: 10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
   - Whitelam & Casert. "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." arXiv preprint (2026). [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
-  - "Thermodynamic Computing Advances with Design and Training." Berkeley Lab research announcement (2026), journal DOI not verified. [Molecular Foundry](https://foundry.lbl.gov/2026/03/06/thermodynamic-computing-advances-with-design-and-training-2/)
+  - Whitelam, S. & Casert, C. "Nonlinear thermodynamic computing out of equilibrium." *Nature Communications* 17, 1189 (2026). [DOI:10.1038/s41467-025-67958-0](https://www.nature.com/articles/s41467-025-67958-0) (arXiv:2412.17183)
 - **Relevance to Zae**: Core training method for SNN-to-TC parameter transfer (Phase 2 implementation target); HBSC is the primary solution to the brain-scale interconnect wall
 
 ### Normal Computing: Carnot Architecture / CN101

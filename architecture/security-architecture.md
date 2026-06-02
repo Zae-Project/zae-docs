@@ -104,6 +104,7 @@ Canonical bindings from [api-contracts.yaml](../integration/api-contracts.yaml),
 | TLS 1.3 (`TLS_AES_256_GCM_SHA384`) | Control plane (REST, WebSocket control) | Typical TLS | Handshake amortized per session |
 | HMAC-SHA256 | `StimulationCommandDownlink.safety_signature` | <0.1 ms | Verified at L3 before any stimulation is enacted |
 | Paillier homomorphic encryption | Identity handshakes and cognitive-privacy-preserving operations | Slow (>100 ms) | Not on the hot path; bounded use |
+| Hybrid homomorphic encryption (HHE) | Cognitive-privacy-preserving stream, candidate to replace pure FHE on this path | Symmetric on the wire (sub-ms); HE cost moved server-side | HERA / Rubato symmetric cipher transcrypted into CKKS server-side. Candidate for the section 13 throughput ceiling; not yet adopted |
 | CRC32 | Packet integrity on hot-path messages | <0.1 ms | Integrity only; not authenticity |
 | SHA-256 | State snapshot integrity | ~1 ms per MB | Used in `StateHeader.checksum_sha256` ([api-contracts.yaml](../integration/api-contracts.yaml)) |
 
@@ -145,6 +146,7 @@ The four layers extend the outline in [unified-platform-architecture.md §Securi
 - AES-256-GCM on every real-time stream between Z1 and Z4.
 - TLS 1.3 on the control plane (ground REST, WebSocket control messages).
 - Paillier FHE reserved for identity handshakes and privacy-preserving operations; off the hot path.
+- Hybrid homomorphic encryption (HHE, HERA / Rubato transcrypted to CKKS) is the candidate for any cognitive-privacy-preserving stream that needs HE semantics without the pure-FHE latency. See section 13, open question 1.
 - End to end from implant HSM to payload TPM. No cleartext exposure at any intermediate zone.
 
 Covers: cognitive exfiltration, identity spoofing (with ECDH+certs), replay (with timestamp IV and sequence numbers).
@@ -262,7 +264,7 @@ Signal longevity makes neural data a higher-than-average harvest target. The cog
 
 ## 13. Open Questions
 
-1. FHE throughput ceiling. Paillier on the identity-handshake path is acceptable. Whether any FHE scheme can sustain a 100 Mbps stream at <1 ms latency for realtime cognitive-privacy-preserving inference is unresolved.
+1. FHE throughput ceiling. Paillier on the identity-handshake path is acceptable. Pure FHE cannot sustain a 100 Mbps stream at <1 ms latency for realtime cognitive-privacy-preserving inference. The realistic path is hybrid homomorphic encryption (HHE): a lightweight symmetric cipher (HERA, Rubato) on the wire, transcrypted into CKKS server-side, with reported 3 to 5x latency reductions and GPU/FPGA CKKS acceleration (KLSS key-switching ~181x on GPU). Whether HHE closes the gap on this path is the open item.
 2. Post-quantum timeline. Waiting on NIST final parameter sets and TPM firmware support. Hybrid transition plan is sketched but not scheduled.
 3. TC side-channel budget. The noise-envelope advantage is plausible, not measured. A formal evaluation on a concrete TC hardware profile is needed.
 4. PUF enrollment drift under radiation. How often a TC PUF must be re-enrolled in LEO conditions is unknown. Paired with the TID question in [thermodynamic-arkspace-interface.md](../integration/thermodynamic-arkspace-interface.md).
