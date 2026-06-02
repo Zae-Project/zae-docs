@@ -291,8 +291,8 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 - **Key Contributions**: First demonstration of gradient descent (via Onsager-Machlup functional) for TC hardware training; Hierarchical Bilinear Skip Coupling (HBSC) for non-local connectivity; hybrid digital conditioning for eigenvalue concentration problem
 - **Major Works**:
   - "Training Thermodynamic Computers by Gradient Descent." *PNAS* (2026). [DOI: 10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
-  - Whitelam & Casert. "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." *Nature Communications* (2026). [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
-  - "Thermodynamic Computing Advances with Design and Training." *Nature Communications* 17, 1189 (2026). [Molecular Foundry](https://foundry.lbl.gov/2026/03/06/thermodynamic-computing-advances-with-design-and-training-2/)
+  - Whitelam & Casert. "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." arXiv preprint (2026). [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
+  - "Thermodynamic Computing Advances with Design and Training." Berkeley Lab research announcement (2026), journal DOI not verified. [Molecular Foundry](https://foundry.lbl.gov/2026/03/06/thermodynamic-computing-advances-with-design-and-training-2/)
 - **Relevance to Zae**: Core training method for SNN-to-TC parameter transfer (Phase 2 implementation target); HBSC is the primary solution to the brain-scale interconnect wall
 
 ### Normal Computing: Carnot Architecture / CN101
@@ -326,7 +326,7 @@ This bibliography represents the intellectual foundations from which the Zae Pro
 1. Conte, Hylton et al. (2019). "Thermodynamic Computing." CCC Workshop. [arXiv:1911.01968](https://arxiv.org/abs/1911.01968)
 2. Jelinčič, Verdon, McCourt et al. (2025). "An Efficient Probabilistic Hardware Architecture for Diffusion-like Models." [arXiv:2510.23972](https://arxiv.org/abs/2510.23972)
 3. Whitelam, S. (2026). "Training Thermodynamic Computers by Gradient Descent." *PNAS*. [DOI:10.1073/pnas.2528413123](https://www.pnas.org/doi/10.1073/pnas.2528413123)
-4. Whitelam, S. & Casert, C. (2026). "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." *Nature Communications*. [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
+4. Whitelam, S. & Casert, C. (2026). "Thermodynamic Diffusion Inference with Minimal Digital Conditioning." arXiv preprint. [arXiv:2604.14332](https://arxiv.org/abs/2604.14332)
 5. Aifer, M. et al. (2024). "Thermodynamic Linear Algebra." *npj Unconventional Computing* 1:13.
 6. Donatella, K. et al. (2025). "Scalable Thermodynamic Second-order Optimization." [arXiv:2502.08603](https://arxiv.org/abs/2502.08603) (thermodynamic K-FAC, Normal Computing)
 7. Gao, L. et al. (2025). "Stochastic Neuromorphic Computing Architecture based on VCMA-MTJ." *Micromachines* 17(2):216.
