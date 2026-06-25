@@ -147,7 +147,7 @@ This document is the overview. Deep dives live in [data-flow-architecture.md](./
 **Repository**: [Zae-Project/brain-emulation](https://github.com/Zae-Project/brain-emulation)
 **Website**: [mindtransfer.me](https://mindtransfer.me)
 
-**Current Capabilities** (from brain_emulation repo):
+**Current Capabilities** (from brain-emulation repo):
 - Interactive 3D SNN visualizer
 - Atlas-based brain region templates (Allen, BrainGlobe, Julich)
 - 30+ neuron types with biological accuracy

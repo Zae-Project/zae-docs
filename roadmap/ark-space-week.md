@@ -29,7 +29,7 @@
 |------|--------|-------|-------|
 | Create Zae GitHub organization | [x] | - | [Zae-Project](https://github.com/Zae-Project) |
 | Create zae-docs repository | [x] | - | [zae-docs](https://github.com/Zae-Project/zae-docs) |
-| Move brain_emulation to Zae | [x] | - | [brain-emulation](https://github.com/Zae-Project/brain-emulation) |
+| Move brain-emulation to Zae | [x] | - | [brain-emulation](https://github.com/Zae-Project/brain-emulation) |
 | Move neutral-consciousness-engine to Zae | [x] | - | [neutral-consciousness-engine](https://github.com/Zae-Project/neutral-consciousness-engine) |
 | Create arkspace-core in Zae | [x] | - | [arkspace-core](https://github.com/Zae-Project/arkspace-core) |
 
